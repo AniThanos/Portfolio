@@ -1,11 +1,18 @@
 const express=require('express');
 const app=express();
-const mongoose=require('mongoose')
-let port=process.env.port||5002
-app.listen(port,()=>console.log(`Server running on ${port}`));
+const mongoose=require('mongoose');
 const users=require('./routes/apis/users')
 const profile=require('./routes/apis/profile')
 const posts=require('./routes/apis/posts')
+const bodyParser=require('body-parser');
+
+
+//body-parser middleware
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+let port=process.env.port||5002
+app.listen(port,()=>console.log(`Server running on ${port}`));
 
 const db=require('./config/keys').mongoURI;
 
