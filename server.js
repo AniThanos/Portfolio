@@ -1,30 +1,36 @@
-const express=require('express');
-const app=express();
-const mongoose=require('mongoose');
-const users=require('./routes/apis/users')
-const profile=require('./routes/apis/profile')
-const posts=require('./routes/apis/posts')
-const bodyParser=require('body-parser');
-
+const express = require("express");
+const app = express();
+const mongoose = require("mongoose");
+const users = require("./routes/apis/users");
+const profile = require("./routes/apis/profile");
+const posts = require("./routes/apis/posts");
+const bodyParser = require("body-parser");
+const passport = require("passport");
 
 //body-parser middleware
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-let port=process.env.port||5002
-app.listen(port,()=>console.log(`Server running on ${port}`));
+//passport middleware
+app.use(passport.initialize());
 
-const db=require('./config/keys').mongoURI;
+//passport config
+require("./config/passport")(passport);
+
+let port = process.env.port || 5002;
+app.listen(port, () => console.log(`Server running on ${port}`));
+
+const db = require("./config/keys").mongoURI;
 
 //connect to mongodb using mongoose
-mongoose.connect(db,{ useNewUrlParser: true })
-    .then(()=>console.log("MongoDB connected"))
-    .catch(err=>{console.log(err)})
-app.get('/',(req,res)=>{
-    res.send("hello World")
-})
+mongoose
+  .connect(db, { useNewUrlParser: true })
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => {
+    console.log(err);
+  });
 
 //use Routes
-app.use('/api/users',users);
-app.use('/api/profile',profile);
-app.use('/api/posts',posts);
+app.use("/api/users", users);
+app.use("/api/profile", profile);
+app.use("/api/posts", posts);
