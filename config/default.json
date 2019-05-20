@@ -1,5 +1,7 @@
 {
     // "mongoURI": "mongodb+srv://animesh:animesh@cluster0-i3kxg.mongodb.net/test?retryWrites=true",
     "mongoURI": "mongodb://localhost:27017/portfolio",
-    "jwtSecret": "Secret"
+    "jwtSecret": "Secret",
+    "githubClientId": "2399d8b3a4be03e49bcc",
+    "githubClientSecret": "6015caa0fbf7d9a61304819b9bb0a8c40071d6b9"
 }
