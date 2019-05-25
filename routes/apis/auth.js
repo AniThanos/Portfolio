@@ -7,12 +7,12 @@ const { check, validationResult } = require('express-validator/check')
 const config = require('config');
 const jwt = require('jsonwebtoken');
 //private access
-router.get('/api/auth', auth, async (req, res) => {
+router.get('/', auth, async (req, res) => {
     try {
-        const user = User.findById(req.user.id).select('-password');
+        const user = await User.findById(req.user.id).select('-password');
         res.json(user);
     } catch (err) {
-        console.log(err.message);
+        console.log(err);
         res.status(500).send("Server Error");
     }
 });
