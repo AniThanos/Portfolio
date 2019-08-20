@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // //passport config
 // require("./config/passport")(passport);
 
-let port = process.env.port || 5002;
+let port = process.env.PORT || 5002;
 app.listen(port, () => console.log(`Server running on ${port}`));
 
 // const db = require("./config/keys").mongoURI;
